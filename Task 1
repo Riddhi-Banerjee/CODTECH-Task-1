@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include<string.h>
+#include<ctype.h>
+void askQuestion(char question[], char options[][100], char correctAnswer, int *score) {
+    char userAnswer;
+    printf("%s\n", question);
+    for (int i = 0; i < 4; i++) {
+        printf("%c. %s\n", 'A' + i, options[i]);
+    }
+    printf("Your answer (A, B, C, or D): ");
+    scanf(" %c", &userAnswer);
+    userAnswer=toupper(userAnswer);
+    if (userAnswer == correctAnswer) {
+        printf("Correct!\n");
+        (*score)++;
+    } else {
+        printf("Incorrect! The correct answer was %c.\n", correctAnswer);
+    }
+    printf("\n");
+}
+int main() {
+    int score = 0;
+    char questions[10][200] = {
+        "1. What is the capital of France?",
+        "2. Which planet is known as the Red Planet?",
+        "3. What is the largest animal on Earth?",
+        "4. How many continents are there in the world?",
+        "5. Eggs are rich in?",
+        "6. Which is the national animal of India?",
+        "7. Which animal is known as the king of the jungle?",
+        "8. Which is the second largest continent in the world?",
+        "9. What is the name of the weak zone of the earth crust?",
+        "10. Where was the first national Museum opened in India?"
+    };
+
+    char options[10][4][100] = {
+        {"Paris", "London", "Berlin", "Madrid"},
+        {"Earth", "Mars", "Jupiter", "Venus"},
+        {"Elephant", "Blue Whale", "Giraffe", "Shark"},
+        {"seven","eight","five","nine"},
+        {"Carbohydrates","Fats","Calcium","Protein"},
+        {"Lion","Peacock","Tiger","Dog"},
+        {"Lion","Peacock","Tiger","Dog"},
+        {"Asia","Africa","Europe","Antarctica"},
+        {"Seismic","Cosmic","Formic","Anaemic"},
+        {"Delhi","Hyderabad","Rajasthan","Mumbai"}
+    };
+    char correctAnswers[10] = {'A', 'B', 'B', 'A', 'D', 'C', 'A', 'B', 'A', 'D'};
+    for (int i = 0; i < 10; i++) {
+        askQuestion(questions[i], options[i], correctAnswers[i], &score);
+    }
+    printf("Your final score is: %d out of 10\n", score);
+    if (score == 10) {
+        printf("Excellent! Perfect score!\n");
+    } else if ((score == 9)||(score==8)) {
+        printf("Good job! Almost there.\n");
+    } else if ((score == 7)||(score==6)) {
+        printf("You can do better! Try again.\n");
+    }else if((score<=5)&&(score>2)){
+        printf("Keep trying!!");
+    } 
+    else {
+        printf("Better luck next time.\n");
+    }
+    return 0;
+}
